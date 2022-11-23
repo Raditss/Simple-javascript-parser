@@ -1,125 +1,99 @@
-import itertools
+import keyword
 
-left, right = 0, 1
+terminal = keyword.kwlist
 
-def loadModel(modelPath):
-	file = open(modelPath).read()
-	K = (file.split("Variables:\n")[0].replace("Terminals:\n","").replace("\n",""))
-	V = (file.split("Variables:\n")[1].split("Productions:\n")[0].replace("Variables:\n","").replace("\n",""))
-	P = (file.split("Productions:\n")[1])
+ruleDict = {}
 
-	K = K.replace('  ',' ').split(' ')
-	V = V.replace('  ',' ').split(' ')
-	newP = []
-	rawRules = P.replace('\n','').split(';')
-	for rule in rawRules:
-		lhs = rule.split(' -> ')[0].replace(' ','')
-		rhs = rule.split(' -> ')[1].split(' | ')
-		for term in rhs:
-			newP.append( (lhs, term.split(' ')) )
+#Read txt
+def readGrammarFile(file):
+  with open(file) as cfg_file:
+    baris = cfg_file.readlines()
+    barisConverted = []
+    for i in range(len(baris)):
+      splitBaris = baris[i].replace("->", "").split()
+      barisConverted.append(splitBaris)
+  return barisConverted
 
-	return K, V, newP
- 
-def setupDict(productions, variables, terms):
-	result = {}
-	for production in productions:
-		if production[left] in variables and production[right][0] in terms and len(production[right]) == 1:
-			result[production[right][0]] = production[left]
-	return result
+#Print read files
+def printGrammar(grammar):
+  for grammarRule in grammar:
+    for i in range(len(grammarRule)):
+      if i == 0:
+        print(grammarRule[i], " -> ", end='')
+      else:
+        print(grammarRule[i], end=' ')
+    print("\n")
 
-def displayCNF(rules):
-	dictionary = {}
-	for rule in rules:
-		if rule[left] in dictionary:
-			dictionary[rule[left]] += ' | '+' '.join(rule[right])
-		else:
-			dictionary[rule[left]] = ' '.join(rule[right])
-	result = ""
-	for key in dictionary:
-		result += key+" -> "+dictionary[key]+"\n"
-	return result
+#Adding rule to global var
+def addGrammarRule(rule):
+  global ruleDict
+  
+  if rule[0] not in ruleDict:
+    ruleDict[rule[0]] = []
+  ruleDict[rule[0]].append(rule[1:])
 
+def convertGrammar(grammar):
+    global ruleDict
+    idx = 0
+    unitProductions, res = [], []
+    for rule in grammar:
+      new_rules = []
+      # buat yang cuma satu nonterminal/terminal di kanan
+      if len(rule) == 2 and not rule[1][0].islower() :
+        unitProductions.append(rule)
+        addGrammarRule(rule)
+        continue
+      # Proses if lebih dari 3 nonterminalnya ini bakal di split jadi cuma 3 doang  
+      while len(rule) > 3:
+        
+        new_rules.append([f"{rule[0]}{idx}", rule[1], rule[2]])
+        rule = [rule[0]] + [f"{rule[0]}{idx}"] + rule[3:]
+        idx += 1
+      if rule:
+        addGrammarRule(rule)
+        res.append(rule)
+      if new_rules:
+        for i in range(len(new_rules)):
+          res.append(new_rules[i])
 
-def isUnitary(rule, variables):
-	if rule[left] in variables and rule[right][0] in variables and len(rule[right]) == 1:
-		return True
-	return False
+    # Proses cuma yang ada 1 non terminal di kanan
+    while unitProductions:
+      rule = unitProductions.pop() 
+      if rule[1] in ruleDict:
+        for item in ruleDict[rule[1]]:
+          new_rule = [rule[0]] + item
+          # nonterminal dikanan bakal dirubah either kalo panjangnya 3 / ada terminal
+          if len(new_rule) > 2 or new_rule[1][0].islower():
+            res.append(new_rule)
+          #Kalo cuma 2 tp dia bukan terminal masukin lg ke production ujungnya bakal dirubah jadi terminal
+          else:
+            unitProductions.append(new_rule)
+          addGrammarRule(new_rule)
+    return res
 
-def isSimple(K,V,rule):
-	if rule[left] in V and rule[right][0] in K and len(rule[right]) == 1:
-		return True
-	return False
+def mapGrammar(grammar):
+  lenGrammar = len(grammar)
+  mp = {}
+  for rule in grammar :
+    mp[str(rule[0])] = []
+  for rule in grammar :
+    elm = []
+    for idxRule in range(1, len(rule)) :
+      apd = rule[idxRule]
+      elm.append(apd)
+    mp[str(rule[0])].append(elm)
+  return mp
 
-def unit_routine(rules, variables):
-	unitaries, result = [], []
-	for aRule in rules:
-		if isUnitary(aRule, variables):
-			unitaries.append( (aRule[left], aRule[right][0]) )
-		else:
-			result.append(aRule)
-	for uni in unitaries:
-		for rule in rules:
-			if uni[right]==rule[left] and uni[left]!=rule[left]:
-				result.append( (uni[left],rule[right]) )
-	
-	return result
+def writeGrammar(grammar):
+    file = open('cnf.txt', 'w')
+    for rule in grammar:
+        file.write(rule[0])
+        file.write(" -> ")
+        for i in rule[1:]:
+            file.write(i)
+            file.write(" ")
+        file.write("\n")
+    file.close()
 
-def prodToDict(productions):
-	dictionary = {}
-	for production in productions :
-		if(production[left] in dictionary.keys()):
-			dictionary[production[left]].append(production[right])
-		else :
-			dictionary[production[left]] = []
-			dictionary[production[left]].append(production[right])
-	return dictionary
-
-def CFGtoCNF(productions,variables,terminals,variablesJar):
-	#Membuat start production baru
-	variables.append('S0')
-	productions = [('S0', [variables[0]])] + productions
-	#Menghilangkan rules yang mengandung variabel dan terminal sekaligus
-	newProductions = []
-	dictionary = setupDict(productions, variables, terminals)
-	for production in productions:
-		if isSimple(terminals,variables,production):
-			newProductions.append(production)
-		else:
-			for term in terminals:
-				for index, value in enumerate(production[right]):
-					if term == value and not term in dictionary:
-						dictionary[term] = variablesJar.pop()
-						variables.append(dictionary[term])
-						newProductions.append( (dictionary[term], [term]) )
-						production[right][index] = dictionary[term]
-					elif term == value:
-						production[right][index] = dictionary[term]
-			newProductions.append( (production[left], production[right]) )
-	productions = newProductions
-	#Menghapus non-unitary rules
-	result = []
-	for production in productions:
-		k = len(production[right])
-		if k <= 2:
-			result.append( production )
-		else:
-			newVar = variablesJar.pop(0)
-			variables.append(newVar+'1')
-			result.append( (production[left], [production[right][0]]+[newVar+'1']) )
-			i = 1
-			for i in range(1, k-2 ):
-				var, var2 = newVar+str(i), newVar+str(i+1)
-				variables.append(var2)
-				result.append( (var, [production[right][i], var2]) )
-			result.append( (newVar+str(k-2), production[right][k-2:k]) ) 
-	productions = result
-	i = 0
-	result = unit_routine(productions, variables)
-	tmp = unit_routine(result, variables)
-	while result != tmp and i < 1000:
-		result = unit_routine(tmp, variables)
-		tmp = unit_routine(result, variables)
-		i+=1
-	productions = result
-
-	return productions
+if __name__ == "__main__":
+  writeGrammar(convertGrammar((readGrammarFile("src\lib\grammar\cfg.txt")))) 
