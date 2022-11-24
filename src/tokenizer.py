@@ -39,7 +39,8 @@ def lex(text, tokenExprs):
 tokenExprs = [
     # Not token
     (r'[ \t]+',                                      None),
-    (r'#[^\n]*',                                     None),
+    (r'//[^\n]*',                                     None),
+    (r'/\*[^\n]*\*/',                                     None),
     (r'[\n]+[ \t]*\'\'\'[(?!(\'\'\'))\w\W]*\'\'\'',  None),
     (r'[\n]+[ \t]*\"\"\"[(?!(\"\"\"))\w\W]*\"\"\"',  None),
     (r'\;',                                          None),
@@ -79,9 +80,6 @@ tokenExprs = [
     (r'\%',             "MOD"),
     (r'\&\&',             "AND"),
     (r'\|\|',             "OR"),
-    (r'\/\/',             "COMMENT"),
-    (r'\/\*',             "CO"),
-    (r'\*\/',             "CC"),
 
 
 
