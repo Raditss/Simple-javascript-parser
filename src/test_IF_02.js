@@ -4,7 +4,7 @@ B = 5
 
 
 if (A == B || A == B) {
-    /*DJASXNBJKASNX*/
+    /* Body bisa apa saja */
     if (B == A){
 
     
@@ -14,3 +14,7 @@ if (A == B || A == B) {
     
 }
 }
+
+    /*DJASXNBJKASNX
+    fsdfcs
+    fsefsefse*/
