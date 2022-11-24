@@ -120,6 +120,7 @@ tokenExprs = [
     (r'\braise\b',              "RAISE"),
     (r'\bwith\b',               "WITH"),
     (r'\bclass\b',              "CLASS"),
+    (r'\bvar\b',              "AVAR"),
 
     # Exception for variable
     (r'[A-Za-z_][A-Za-z0-9_]*', "VAR"),

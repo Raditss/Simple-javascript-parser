@@ -35,6 +35,7 @@ NONE -> none
 BREAK -> break
 AS -> as
 CLASS -> class
+AVAR -> avar
 CONTINUE -> continue
 FUNC -> func
 FOR -> for
@@ -361,6 +362,8 @@ ENTER -> NEWLINE ENTER
 ENTER -> NEWLINE
 VAR -> LB VAR RB
 VAR -> VAR COMMA VAR
+AVAR -> VAR
+AVAR -> VAR EQUAL TYPE
 VARINT -> VAR
 VARINT -> INT
 VARINT -> BOOL
