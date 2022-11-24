@@ -125,7 +125,11 @@ tokenExprs = [
     (r'\btry\b',                "TRY"),
     (r'\bcatch\b',               "CATCH"),
     (r'\bfinally\b',            "FINALLY"),
-
+    (r'\bswitch\b',             "SWITCH"),
+    (r'\bcase\b',               "CASE"),
+    (r'\bdefault\b',            "DEFAULT"),
+    
+    
     # Exception for variable
     (r'[A-Za-z_][A-Za-z0-9_]*', "VAR"),
     ]
