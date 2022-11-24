@@ -77,6 +77,17 @@ tokenExprs = [
     (r'\w+[.]\w+',      "DOTBETWEEN"),
     (r'\.',             "DOT"),
     (r'\%',             "MOD"),
+    (r'\&\&',             "AND"),
+    (r'\|\|',             "OR"),
+    (r'\!',             "NOT"),
+    (r'\^',             "XOR"),
+    (r'\~',             "NEG"),
+    (r'\?',             "QUESTION"),
+    (r'\//',             "COMMENT"),
+    (r'\/*',             "CO"),
+    (r'\*/',             "CC"),
+
+
 
     # Type
     (r'[\+\-]?[0-9]*\.[0-9]+',  "INT"),
@@ -93,9 +104,9 @@ tokenExprs = [
     (r'\btuple\b',              "TYPE"),
 
     # keyword
-    (r'\band\b',                "AND"),
-    (r'\bor\b',                 "OR"),
-    (r'\bnot\b',                "NOT"),
+    # (r'\b&&\b',                "AND"),
+    # (r'\bor\b',                 "OR"),
+    # (r'\bnot\b',                "NOT"),
     (r'\bTrue\b',               "TRUE"),
     (r'\bFalse\b',              "FALSE"),
     (r'\bNone\b',               "NONE"),
@@ -121,7 +132,7 @@ tokenExprs = [
 
     # Exception for variable
     (r'[A-Za-z_][A-Za-z0-9_]*', "VAR"),
-  ]
+    ]
 
 def createToken(text):
     # Read file
