@@ -1,4 +1,4 @@
-from cfgtocnf import readGrammarFile, convertGrammar, mapGrammar
+from CFGtoCNF import readGrammarFile, convertGrammar, mapGrammar
 from tokenizer import createToken
 from parser1 import cykParse
 import re, os, sys, argparse

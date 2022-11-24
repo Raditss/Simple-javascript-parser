@@ -5,6 +5,9 @@ B = 5
 
 if (A === B) {
     /* Body bisa apa saja */
+    if (B == A){
+
+    
 } else if (A == B){
     /* Body bisa apa saja */
 } else {
