@@ -1,6 +1,6 @@
 EQUAL -> equal
 ISEQ -> iseq
-# ISEQQ -> iseqq
+ISEQQ -> iseqq
 LB -> lb
 RB -> rb
 COLON -> colon
