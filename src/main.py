@@ -1,6 +1,6 @@
-from CFGtoCNF import readGrammarFile, convertGrammar, mapGrammar
-from tokenizer import createToken
-from parser1 import cykParse
+from CFGnCNF.CFGtoCNF import readGrammarFile, convertGrammar, mapGrammar
+from TOKEN.tokenizer import createToken
+from CYK.tokenizer import cykParse
 import re, os, sys, argparse
 
 def bannerCompiler() :
@@ -28,13 +28,13 @@ def verdict():
   bannerCompiler()
   print("\nLoading...")
   print("Checking your codes...")
-  print("File name: " + str(args.file.name))
+  print("File name: " + str(args.file.name.split('/')[len(args.file.name.split('/'))-1]))
   print()
   
   # Token & CNF
   token = createToken(args.file.name)
   token = [x.lower() for x in token]
-  CNFgrammar = mapGrammar(convertGrammar((readGrammarFile("REFERENSI.txt"))))
+  CNFgrammar = mapGrammar(convertGrammar((readGrammarFile("CFGnCNF/CFG.txt"))))
   print("======================VERDICT=========================")
   print()
   cykParse(token, CNFgrammar)

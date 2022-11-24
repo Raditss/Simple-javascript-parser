@@ -151,14 +151,10 @@ def createToken(text):
 
     # Write file
     path = os.getcwd()
-    fileWrite = open(path + "/tokenResult.txt", 'w')
+    fileWrite = open("TOKEN/tokenResult.txt", 'w')
     for token in tokenResult:
         fileWrite.write(str(token)+" ")
         # print(token)
     fileWrite.close()
 
     return tokenResult
-
-# if __name__ == "__main__": 
-#     path = os.getcwd()
-#     createToken(path + "/cnf.txt")

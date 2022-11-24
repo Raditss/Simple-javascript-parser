@@ -85,7 +85,7 @@ def mapGrammar(grammar):
   return mp
 
 def writeGrammar(grammar):
-    file = open('cnf.txt', 'w')
+    file = open('CNF.txt', 'w')
     for rule in grammar:
         file.write(rule[0])
         file.write(" -> ")
@@ -96,4 +96,4 @@ def writeGrammar(grammar):
     file.close()
 
 if __name__ == "__main__":
-  writeGrammar(convertGrammar((readGrammarFile("REFERENSI.txt")))) 
+  writeGrammar(convertGrammar((readGrammarFile("CFG.txt")))) 
