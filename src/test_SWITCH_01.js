@@ -1,6 +1,6 @@
 switch (X){
     case 1:
-    case __init__:;;;;;;
+    case __init__:;;;;
 
     case 3:
         saya 
