@@ -1,3 +1,3 @@
-// foo is known to exist now but it has no type or value:
-const foo = 3 % 5;
-foo; //null
+print("halo");
+var a = 5
+b = 4
