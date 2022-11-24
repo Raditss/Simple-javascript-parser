@@ -96,4 +96,4 @@ def writeGrammar(grammar):
     file.close()
 
 if __name__ == "__main__":
-  writeGrammar(convertGrammar((readGrammarFile("CFG.txt")))) 
+  writeGrammar(convertGrammar((readGrammarFile("REFERENSI.txt")))) 

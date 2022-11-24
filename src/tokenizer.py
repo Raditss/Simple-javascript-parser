@@ -145,6 +145,6 @@ def createToken(text):
 
     return tokenResult
 
-if __name__ == "__main__": 
-    path = os.getcwd()
-    createToken(path + "/cnf.txt")
+# if __name__ == "__main__": 
+#     path = os.getcwd()
+#     createToken(path + "/cnf.txt")
