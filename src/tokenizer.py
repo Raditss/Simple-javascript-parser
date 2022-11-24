@@ -41,7 +41,7 @@ tokenExprs = [
     (r'[ \t]+',                                      None),
     (r'//[^\n]*',                                     None),
     (r'/\*[^\/\*]*\*/',                              "MULTILINE"),
-    (r'\;',                                          None),
+    (r'\;',                                          "SCOLON"),
     (r'\n',                                          "NEWLINE"),
 
     # Operator
@@ -61,6 +61,7 @@ tokenExprs = [
     (r'\{',             "LCB"),
     (r'\}',             "RCB"),
     (r'\:',             "COLON"),
+    (r'\;',             "SCOLON"),
     (r'-=',             "SUBTREQ"),
     (r'\*=',            "MULEQ"),
     (r'\+=',            "SUMEQ"),
@@ -121,6 +122,9 @@ tokenExprs = [
     (r'\bwith\b',               "WITH"),
     (r'\bclass\b',              "CLASS"),
     (r'\bvar\b',              "AVAR"),
+    (r'\btry\b',                "TRY"),
+    (r'\bcatch\b',               "CATCH"),
+    (r'\bfinally\b',            "FINALLY"),
 
     # Exception for variable
     (r'[A-Za-z_][A-Za-z0-9_]*', "VAR"),
