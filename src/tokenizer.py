@@ -114,7 +114,7 @@ tokenExprs = [
     (r'\bimport\b',             "IMPORT"),
     (r'\bas\b',                 "AS"),
     (r'\bis\b',                 "IS"),
-    (r'\bdef\b',                "DEF"),
+    (r'\bfunction\b',                "FUNC"),
     (r'\breturn\b',             "RETURN"),
     (r'\braise\b',              "RAISE"),
     (r'\bwith\b',               "WITH"),

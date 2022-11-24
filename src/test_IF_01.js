@@ -1,8 +1,4 @@
-if (A !== B) {
-    halo()
-} 
-else if (A == C) {
-} 
-else {
-    yayaya()
-}
+function myFunction(a,b) {
+    let carName = "Volvo";
+    // code here CAN use carName
+  }
