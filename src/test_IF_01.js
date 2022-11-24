@@ -1,8 +1,4 @@
-function halo() {
-    console.log("halo");
-    if (true):
-        if (t==a):
-            prtin()
-    return j
-    
+if (a==b) {
+    console.log("a is equal to b");
 }
+  
