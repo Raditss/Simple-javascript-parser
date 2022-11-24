@@ -39,7 +39,7 @@ def lex(text, tokenExprs):
 tokenExprs = [
     # Not token
     (r'[ \t]+',                                      None),
-    (r'//[^\n]*',                                     None),
+    (r'//[^\n]*',                                    None),
     (r'/\*[^\/\*]*\*/',                              "MULTILINE"),
     (r'\;',                                          "SCOLON"),
     (r'\n',                                          "NEWLINE"),
@@ -121,7 +121,9 @@ tokenExprs = [
     (r'\braise\b',              "RAISE"),
     (r'\bwith\b',               "WITH"),
     (r'\bclass\b',              "CLASS"),
-    (r'\bvar\b',              "AVAR"),
+    (r'\bvar\b',                "AVAR"),
+    (r'\bconst\b',              "ACONST"),
+    (r'\blet\b',                "ALET"),
     (r'\btry\b',                "TRY"),
     (r'\bcatch\b',               "CATCH"),
     (r'\bfinally\b',            "FINALLY"),
