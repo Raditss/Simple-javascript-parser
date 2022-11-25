@@ -2,38 +2,22 @@ import os
 import sys 
 import re
 
-def lex(text, tokenExprs):
+def matching(text, exprs):
     pos = 0             # absolute position
-    currPos = 1         # position in relative to line
-    line = 1            # current line
     tokens = []
-
     while (pos < len(text)):
-        if text[pos] == '\n':
-            line += 1
-            currPos = 1
-
-        flag = None
-        for tokenExpr in tokenExprs:
+        temp = None
+        for tokenExpr in exprs:
             pattern, tag = tokenExpr    
-            
             regex = re.compile(pattern)
-            flag = regex.match(text, pos)
-
-            if flag:
-                # texts = flag.group(0)
+            temp = regex.match(text, pos)
+            if temp:
                 if tag:
                     token = tag
                     tokens.append(token)
                 break
-
-        if not flag:
-            print(f"\nSYNTAX ERROR\nIllegal character {text[pos]} at line {line} and column {currPos}")
-            sys.exit(1)
-        else:
-            pos = flag.end(0)
-        currPos += 1
-
+        if temp:
+            pos = temp.end(0)
     return tokens
 
 tokenExprs = [
@@ -96,9 +80,6 @@ tokenExprs = [
     (r'\btuple\b',              "TYPE"),
 
     # keyword
-    # (r'\b&&\b',                "AND"),
-    # (r'\bor\b',                 "OR"),
-    # (r'\bnot\b',                "NOT"),
     (r'\btrue\b',               "TRUE"),
     (r'\bfalse\b',              "FALSE"),
     (r'\bNone\b',               "NONE"),
@@ -130,19 +111,16 @@ tokenExprs = [
     (r'\bswitch\b',             "SWITCH"),
     (r'\bcase\b',               "CASE"),
     (r'\bdefault\b',            "DEFAULT"),
-    
-    
-    # Exception for variable
+    # variable
     (r'[A-Za-z_][A-Za-z0-9_]*', "VAR"),
     ]
 
 def createToken(text):
-    # Read file
-    file = open(text, encoding="utf8")
-    characters = file.read()
-    file.close()
+    tkn = open(text, encoding="utf8")
+    characters = tkn.read()
+    tkn.close()
 
-    tokens = lex(characters, tokenExprs)
+    tokens = matching(characters, tokenExprs)
     tokenResult = []
 
     for token in tokens:
@@ -151,10 +129,10 @@ def createToken(text):
 
     # Write file
     path = os.getcwd()
-    fileWrite = open("TOKEN/tokenResult.txt", 'w')
+    tkn = open("TOKEN/tokenResult.txt", 'w')
     for token in tokenResult:
-        fileWrite.write(str(token)+" ")
+        tkn.write(str(token)+" ")
         # print(token)
-    fileWrite.close()
+    tkn.close()
 
     return tokenResult
