@@ -116,6 +116,8 @@ exprs = [
     (r'\bdefault\b',            "DEFAULT"),
     (r'\bdelete\b',            "DELETEE"),
     (r'\bdo\b',            "DO"),
+    (r'\bnew\b',                "NEW"),
+    (r'\bthrow\b',              "THROW"),
     # variable
     (r'[A-Za-z_][A-Za-z0-9_]*', "VAR"),
     ]
