@@ -28,9 +28,9 @@ def result():
     token = createToken(args.file.name)
     token = [x.lower() for x in token]
     CNF = grammarMapping(convertCFG((readFile("CFGnCNF/CFG.txt"))))
-    print("=======================RESULT=========================\n")
+    print("==========================================RESULT============================================\n")
     CYKParser(token, CNF)
-    print("======================================================")
+    print("============================================================================================")
 
 if __name__ == "__main__":
     result()
