@@ -61,6 +61,7 @@ INT -> INT IN VAR
 INT -> INT IN LIST
 INT -> INT IN DICT
 VAR -> var
+VAR -> VAR DOT VAR
 NEWLINE -> newline
 TYPE -> type
 ARROW -> arrow
