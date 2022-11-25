@@ -1,2 +1,1 @@
-if (9a){}
-else if (a>b) {}
+var a = adnog4

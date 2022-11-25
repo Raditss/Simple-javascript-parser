@@ -1,9 +1,4 @@
-function s() {
-    var x = 1;
+function s(p) {
     if (x == 1) {
-
-    }
-    else {
-
     }
 }
