@@ -102,10 +102,8 @@ exprs = [
     (r'\bfrom\b',               "FROM"),
     (r'\bimport\b',             "IMPORT"),
     (r'\bas\b',                 "AS"),
-    (r'\bis\b',                 "IS"),
     (r'\bfunction\b',           "FUNC"),
     (r'\breturn\b',             "RETURN"),
-    (r'\braise\b',              "RAISE"),
     (r'\bwith\b',               "WITH"),
     (r'\bclass\b',              "CLASS"),
     (r'\bvar\b',                "AVAR"),
@@ -117,6 +115,8 @@ exprs = [
     (r'\bswitch\b',             "SWITCH"),
     (r'\bcase\b',               "CASE"),
     (r'\bdefault\b',            "DEFAULT"),
+    (r'\bdelete\b',            "DELETE"),
+    (r'\bdo\b',            "DO"),
     # variable
     (r'[A-Za-z_][A-Za-z0-9_]*', "VAR"),
     ]
