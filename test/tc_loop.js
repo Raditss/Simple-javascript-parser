@@ -7,6 +7,5 @@ for (i = 0; i < 5; i++) {
         var x = 1;
     } while (x < 1);
     if (a>b) {
-        break;
     }
 }
