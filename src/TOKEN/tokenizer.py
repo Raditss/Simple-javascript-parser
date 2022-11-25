@@ -31,8 +31,8 @@ tokenExprs = [
     # Operator
     (r'\=(?!\=)',       "EQUAL"),
     (r'\===',           "ISEQQ"),
-    (r'\==',            "ISEQ"),
     (r'\!==',           "NEQQ"),
+    (r'\==',            "ISEQ"),
     (r'!=',             "NEQ"),
     (r'<=',             "LE"),
     (r'<',              "L"),
