@@ -1,13 +1,11 @@
-
-if (a>b) {
-    c = a;
-} else {
-    c = b;
-    if (a>b) {}
-    else if (b>c) {
-        c = b;
-    } else {
-        c = c;
-    }
+let x = 0;
+if(x == 0){
+    console.log("x = 0");
+}else if((x+1) == 2){
+    console.log("Benar");
+}else if((x+1) == 4){
+    console.log("Mungkin");
+}else{
+    console.log("Salah");
 }
 
