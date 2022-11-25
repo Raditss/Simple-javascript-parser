@@ -1,6 +1,6 @@
 from CFGnCNF.CFGtoCNF import readFile, convertCFG, grammarMapping
 from TOKEN.tokenizer import createToken
-from CYK.CYK import cykParse
+from CYK.CYK import CYKParser
 import re, os, sys, argparse
 
 def bannerCompiler() :
@@ -37,7 +37,7 @@ def verdict():
   CNFgrammar = grammarMapping(convertCFG((readFile("CFGnCNF/CFG.txt"))))
   print("======================VERDICT=========================")
   print()
-  cykParse(token, CNFgrammar)
+  CYKParser(token, CNFgrammar)
   print()
   print("======================================================")
 
