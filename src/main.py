@@ -1,6 +1,6 @@
 from CFGnCNF.CFGtoCNF import readGrammarFile, convertGrammar, mapGrammar
 from TOKEN.tokenizer import createToken
-from CYK.tokenizer import cykParse
+from CYK.CYK import cykParse
 import re, os, sys, argparse
 
 def bannerCompiler() :
