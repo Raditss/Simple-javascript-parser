@@ -57,7 +57,6 @@ exprs = [
     (r'\*=',            "MULEQ"),
     (r'\+=',            "SUMEQ"),
     (r'/=',             "DIVEQ"),
-    (r'\->',            "ARROW"),
     (r'\+',             "ADD"),
     (r'\-',             "SUBTR"),
     (r'\*\*',           "POW"),
