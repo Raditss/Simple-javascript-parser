@@ -13,9 +13,9 @@ def CYKParser(token, CNF):
                         if len(right) == 2 and right[0] in T[j][k] and right[1] in T[k + 1][i]:
                             T[j][i].add(left)
     if 'S' in T[0][N-1]:
-        print("Selamat, program kamu bisa di compile 🤣")
+        print("Selamat, program kamu bisa di compile 🤣\n")
     else:
-        print("Maaf anda kurang beruntung, silahkan coba lagi 😔")
+        print("Maaf anda kurang beruntung, silahkan coba lagi 😔\n")
       
 if __name__ == "__main__":
     pass
