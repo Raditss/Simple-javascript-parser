@@ -4,20 +4,32 @@ import re
 
 def matching(text, exprs):
     pos = 0             # absolute position
+    currPos = 1         # position in relative to line
+    line = 1            # current line
     tokens = []
+
     while (pos < len(text)):
-        temp = None
-        for tokenExpr in exprs:
+        if text[pos] == '\n':
+            line += 1
+            currPos = 1
+
+        flag = None
+        for tokenExpr in tokenExprs:
             pattern, tag = tokenExpr    
             regex = re.compile(pattern)
-            temp = regex.match(text, pos)
-            if temp:
+            flag = regex.match(text, pos)
+            if flag:
                 if tag:
                     token = tag
                     tokens.append(token)
                 break
-        if temp:
-            pos = temp.end(0)
+        if not flag:
+            print(f"\nSYNTAX ERROR\n Variabel tidak boleh dimulai dengan simbol {text[pos]}")
+            sys.exit(1)
+        else:
+            pos = flag.end(0)
+        currPos += 1
+
     return tokens
 
 tokenExprs = [
