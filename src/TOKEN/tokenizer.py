@@ -137,3 +137,4 @@ def createToken(text):
     tkn.close()
 
     return tokenResult
+

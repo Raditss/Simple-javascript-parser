@@ -1,4 +1,4 @@
-from CFGnCNF.CFGtoCNF import readFile, convertCFG, grammarMapping
+from CFGnCNF.CFGtoCNF import readGrammarFile, convertGrammar, mapGrammar
 from TOKEN.tokenizer import createToken
 from CYK.CYK import CYKParser
 import argparse
@@ -27,7 +27,7 @@ def result():
     print("File name: " + str(args.file.name.split('/')[len(args.file.name.split('/'))-1]) + "\n")
     token = createToken(args.file.name)
     token = [x.lower() for x in token]
-    CNF = grammarMapping(convertCFG((readFile("CFGnCNF/CFG.txt"))))
+    CNF = mapGrammar(convertGrammar((readGrammarFile("CFGnCNF/CFG.txt"))))
     print("==========================================RESULT============================================\n")
     CYKParser(token, CNF)
     print("============================================================================================")
