@@ -28,13 +28,12 @@ def matching(text, exprs):
     return tokens
 
 exprs = [
-    # Not token
+    # blank
     (r'[ \t]+',                                      None),
     (r'//[^\n]*',                                    None),
     (r'/\*[^\/\*]*\*/',                              "MULTILINE"),
     (r'\;',                                          "SCOLON"),
     (r'\n',                                          "NEWLINE"),
-
     # Operator
     (r'\=(?!\=)',       "EQUAL"),
     (r'\===',           "ISEQQ"),
@@ -67,9 +66,6 @@ exprs = [
     (r'\%',             "MOD"),
     (r'\&\&',             "AND"),
     (r'\|\|',             "OR"),
-
-
-
     # Type
     (r'[\+\-]?[0-9]*\.[0-9]+',  "INT"),
     (r'[\+\-]?[1-9][0-9]+',     "INT"),
@@ -83,7 +79,6 @@ exprs = [
     (r'\bcomplex\b',            "TYPE"),
     (r'\blist\b',               "TYPE"),
     (r'\btuple\b',              "TYPE"),
-
     # keyword
     (r'\btrue\b',               "TRUE"),
     (r'\bfalse\b',              "FALSE"),
