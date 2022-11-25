@@ -3,36 +3,31 @@ import sys
 import re
 
 def matching(text, exprs):
-    pos = 0             # absolute position
-    currPos = 1         # position in relative to line
-    line = 1            # current line
+    pos = 0 
+    line = 1
     tokens = []
-
     while (pos < len(text)):
         if text[pos] == '\n':
             line += 1
-            currPos = 1
-
         flag = None
-        for tokenExpr in tokenExprs:
-            pattern, tag = tokenExpr    
+        for tokenExpr in exprs:
+            pattern, temp = tokenExpr    
             regex = re.compile(pattern)
             flag = regex.match(text, pos)
             if flag:
-                if tag:
-                    token = tag
+                if temp:
+                    token = temp
                     tokens.append(token)
                 break
         if not flag:
-            print(f"\nSYNTAX ERROR\n Variabel tidak boleh dimulai dengan simbol {text[pos]}")
+            print(f"\nSYNTAX ERROR\n Terdapat error pada line {line}")
             sys.exit(1)
         else:
             pos = flag.end(0)
-        currPos += 1
 
     return tokens
 
-tokenExprs = [
+exprs = [
     # Not token
     (r'[ \t]+',                                      None),
     (r'//[^\n]*',                                    None),
@@ -128,22 +123,18 @@ tokenExprs = [
 
 def createToken(text):
     tkn = open(text, encoding="utf8")
-    characters = tkn.read()
+    chara = tkn.read()
     tkn.close()
 
-    tokens = matching(characters, tokenExprs)
+    tokens = matching(chara, exprs)
     tokenResult = []
 
     for token in tokens:
         tokenResult.append(token)
-
-
-    # Write file
     path = os.getcwd()
     tkn = open("TOKEN/tokenResult.txt", 'w')
     for token in tokenResult:
         tkn.write(str(token)+" ")
-        # print(token)
     tkn.close()
 
     return tokenResult
