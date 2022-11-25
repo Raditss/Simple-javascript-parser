@@ -66,6 +66,9 @@ NEWLINE -> newline
 TYPE -> type
 ARROW -> arrow
 FORMAT -> format
+DELETE -> delete
+DO -> do
+
 S -> ENTER S
 S -> S ENTER
 S -> ENTER
