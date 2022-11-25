@@ -1,4 +1,4 @@
-from CFGnCNF.CFGtoCNF import readGrammarFile, convertGrammar, mapGrammar
+from CFGnCNF.CFGtoCNF import readFile, convertGrammar, grammarMapping
 from TOKEN.tokenizer import createToken
 from CYK.CYK import cykParse
 import re, os, sys, argparse
@@ -34,7 +34,7 @@ def verdict():
   # Token & CNF
   token = createToken(args.file.name)
   token = [x.lower() for x in token]
-  CNFgrammar = mapGrammar(convertGrammar((readGrammarFile("CFGnCNF/CFG.txt"))))
+  CNFgrammar = grammarMapping(convertGrammar((readFile("CFGnCNF/CFG.txt"))))
   print("======================VERDICT=========================")
   print()
   cykParse(token, CNFgrammar)
